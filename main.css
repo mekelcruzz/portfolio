@@ -19,6 +19,7 @@ nav {
   display: flex;
   justify-content: center;
   gap: 6rem;
+  transition: transform 0.3s ease;
 }
 
 nav a {
@@ -27,8 +28,18 @@ nav a {
   font-weight: bold;
 }
 
+.burger {
+  display: none;
+  cursor: pointer;
+}
+
+.burger img {
+  width: 30px;
+  height: 30px;
+}
+
 .modal {
-  display: none; /* hidden by default */
+  display: none;
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -64,7 +75,7 @@ nav a {
 
 .popup-contacts a:hover {
   color: rgb(0, 0, 0);
-  text-decoration: underline; /* optional hover effect */
+  text-decoration: underline; 
 }
 
 .popup-contacts a:active {
@@ -72,11 +83,11 @@ nav a {
 }
 
 .social-links {
-  list-style: none;   /* removes bullets */
-  padding: 0;         /* removes default left indent */
-  margin: 0;          /* removes extra spacing */
-  display: flex;      /* makes icons side by side */
-  gap: 10px;          /* space between icons */
+  list-style: none;   
+  padding: 0;         
+  margin: 0;          
+  display: flex;      
+  gap: 10px;          
 }
 
 
@@ -87,7 +98,7 @@ section {
   margin-bottom: 3em;
 }
 
-/* Alternating section backgrounds */
+
 section:nth-of-type(odd) {
   background: #fff;
   color: #000;
@@ -98,7 +109,7 @@ section:nth-of-type(even) {
   color: #fff;
 }
 
-/* Typography */
+
 .hero-title {
   text-align: center;
   font-size: 3em;
@@ -145,7 +156,7 @@ section:nth-of-type(even) {
   opacity: 0.8;
 }
 
-/* Forms */
+
 form {
   display: flex;
   flex-direction: column;
@@ -162,7 +173,7 @@ button {
   font-size: 1rem;
 }
 
-/* Adapt form inputs to dark sections */
+
 section:nth-of-type(even) input,
 section:nth-of-type(even) textarea {
   background: #111;
@@ -191,14 +202,17 @@ button:hover {
 
 .contacts-footer a:hover {
   color: white;
-  text-decoration: underline; /* optional */
+  text-decoration: underline;
 }
 
 .contacts-footer a:active {
   color: white;
 }
 
-/* Footer */
+.close-nav {
+  display: none;
+}
+
 footer {
   margin-top: -2em;
   text-align: center;
@@ -206,3 +220,126 @@ footer {
   background: #000;
   color: #fff;
 }
+
+/* responsiveness */
+@media (max-width: 1024px) {
+
+  nav {
+    gap: 3rem;
+  }
+
+  .hero-title {
+    font-size: 2.5em;
+  }
+
+  .section-title {
+    font-size: 2em;
+  }
+}
+
+@media (max-width: 768px) {
+  .burger {
+    display: block;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    z-index: 1100;
+    cursor: pointer;
+  }
+
+  .burger img {
+    width: 30px;
+    height: 30px;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background: #000;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 4rem;
+    gap: 2rem;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+  }
+
+  nav a {
+    color: #fff;
+    font-size: 1.2rem;
+    text-align: left;
+    padding-left: 1.5rem;
+  }
+
+  nav.active {
+    left: 0; 
+    transform: translateX(0); 
+  }
+
+   .close-nav {
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    margin-left: auto;
+    margin-bottom: 2rem;
+  }
+
+  .hero-title {
+    font-size: 2em;
+  }
+
+  .hero-text {
+    font-size: 1em;
+    padding: 0 1rem;
+  }
+
+  section {
+    padding: 2rem 1rem;
+  }
+
+  .modal-content {
+    width: 90%;
+    margin: 20% auto;
+  }
+
+  form {
+    width: 100%;
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px; 
+  }
+
+  .hero-title {
+    font-size: 1.8em;
+  }
+
+  .section-title {
+    font-size: 1.5em;
+  }
+
+  .sub-title {
+    font-size: 1.2em;
+  }
+
+  .hero-text {
+    font-size: 0.9em;
+  }
+
+  .social-links {
+    gap: 5px; 
+  }
+
+  .popup-contacts .social-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
