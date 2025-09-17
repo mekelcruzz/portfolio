@@ -53,6 +53,33 @@ nav a {
   cursor: pointer;
 }
 
+.popup-contacts a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+.popup-contacts a:visited {
+  color: rgb(0, 0, 0);
+}
+
+.popup-contacts a:hover {
+  color: rgb(0, 0, 0);
+  text-decoration: underline; /* optional hover effect */
+}
+
+.popup-contacts a:active {
+  color: rgb(0, 0, 0);
+}
+
+.social-links {
+  list-style: none;   /* removes bullets */
+  padding: 0;         /* removes default left indent */
+  margin: 0;          /* removes extra spacing */
+  display: flex;      /* makes icons side by side */
+  gap: 10px;          /* space between icons */
+}
+
+
 section {
   padding: 3rem 1.5rem;
   max-width: auto;
@@ -152,6 +179,23 @@ button {
 
 button:hover {
   background: #333;
+}
+.contacts-footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.contacts-footer a:visited {
+  color: white;
+}
+
+.contacts-footer a:hover {
+  color: white;
+  text-decoration: underline; /* optional */
+}
+
+.contacts-footer a:active {
+  color: white;
 }
 
 /* Footer */
