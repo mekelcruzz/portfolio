@@ -90,6 +90,31 @@ nav a {
   gap: 10px;          
 }
 
+#home {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  overflow: hidden; /* hide scroll from random letters */
+}
+
+#asciiArt {
+  font-family: 'Courier New', Courier, monospace;
+  white-space: pre;
+  text-align: center;
+  margin: 2em auto;
+  font-size: 14px; /* fixed readable size */
+  line-height: 1.1;
+  overflow-x: auto; /* adds horizontal scroll on narrow screens */
+  max-width: 100%;
+}
+
+
 
 section {
   padding: 3rem 1.5rem;
@@ -342,4 +367,5 @@ footer {
     height: 24px;
   }
 }
+
 
