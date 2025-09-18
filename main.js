@@ -72,7 +72,7 @@ const sectionEl = document.getElementById('home');
 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:",.<>/?~';
 
 let transitionProgress = [];
-let showArt = false;
+let showArt = true;
 
 // Initialize progress array
 for (let i = 0; i < artLines.length; i++) {
