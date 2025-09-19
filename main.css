@@ -262,6 +262,16 @@ footer {
   color: #fff;
 }
 
+.project-image {
+  width: 100%;
+  max-width: 500px; 
+  height: auto;     
+  border-radius: 10px;
+  margin-top: 10px;
+  display: block;   
+}
+
+
 /* responsiveness */
 @media (max-width: 1024px) {
 
