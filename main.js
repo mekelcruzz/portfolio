@@ -52,25 +52,19 @@ document.addEventListener("click", (e) => {
   }
 });
 
-
 const artLines = [
-  " /$$      /$$           /$$                 /$$        /$$$$$$            /$$                 /$$$$$$$         /$$$$$$                               ",
-  "| $$$    /$$$          | $$                | $$       /$$__  $$          |__/                | $$__  $$       /$$__  $$                              ",
-  "| $$$$  /$$$$ /$$   /$$| $$   /$$  /$$$$$$ | $$      | $$  \\ $$  /$$$$$$  /$$  /$$$$$$$      | $$  \\ $$      | $$  \\__/  /$$$$$$  /$$   /$$ /$$$$$$$$",
-  "| $$ $$/$$ $$| $$  | $$| $$  /$$/ /$$__  $$| $$      | $$$$$$$$ /$$__  $$| $$ /$$_____/      | $$$$$$$       | $$       /$$__  $$| $$  | $$|____ /$$/",
-  "| $$  $$$| $$| $$  | $$| $$$$$$/ | $$$$$$$$| $$      | $$__  $$| $$  \\__/| $$|  $$$$$$       | $$__  $$      | $$      | $$  \\__/| $$  | $$   /$$$$/ ",
-  "| $$\\  $ | $$| $$  | $$| $$_  $$ | $$_____/| $$      | $$  | $$| $$      | $$ \\____  $$      | $$  \\ $$      | $$    $$| $$      | $$  | $$  /$$__/  ",
-  "| $$ \\/  | $$|  $$$$$$$| $$ \\  $$|  $$$$$$$| $$      | $$  | $$| $$      | $$ /$$$$$$$/      | $$$$$$$/      |  $$$$$$/| $$      |  $$$$$$/ /$$$$$$$$",
-  "|__/     |__/ \\____  $$|__/  \\__/ \\_______/|__/      |__/  |__/|__/      |__/|_______/       |_______/        \\______/ |__/       \\______/ |________/",
-  "              /$$  | $$                                                                                                                              ",
-  "             |  $$$$$$/                                                                                                                              ",
-  "              \\______/                                                                                                                               "
+  "███╗   ███╗██╗   ██╗██╗  ██╗███████╗██╗          █████╗ ██████╗ ██╗███████╗    ██████╗ ██╗   ██╗ █████╗ ███╗   ██╗     ██████╗██████╗ ██╗   ██╗███████╗",
+  "████╗ ████║╚██╗ ██╔╝██║ ██╔╝██╔════╝██║         ██╔══██╗██╔══██╗██║██╔════╝    ██╔══██╗██║   ██║██╔══██╗████╗  ██║    ██╔════╝██╔══██╗██║   ██║╚══███╔╝",
+  "██╔████╔██║ ╚████╔╝ █████╔╝ █████╗  ██║         ███████║██████╔╝██║███████╗    ██████╔╝██║   ██║███████║██╔██╗ ██║    ██║     ██████╔╝██║   ██║  ███╔╝ ",
+  "██║╚██╔╝██║  ╚██╔╝  ██╔═██╗ ██╔══╝  ██║         ██╔══██║██╔══██╗██║╚════██║    ██╔══██╗██║   ██║██╔══██║██║╚██╗██║    ██║     ██╔══██╗██║   ██║ ███╔╝  ",
+  "██║ ╚═╝ ██║   ██║   ██║  ██╗███████╗███████╗    ██║  ██║██║  ██║██║███████║    ██████╔╝╚██████╔╝██║  ██║██║ ╚████║    ╚██████╗██║  ██║╚██████╔╝███████╗",
+  "╚═╝     ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝    ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚══════╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝     ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝",
+  "                                                                                                                                                        "
 ];
 
 const asciiEl = document.getElementById('asciiArt');
 const sectionEl = document.getElementById('home');
 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:",.<>/?~';
-
 let transitionProgress = [];
 let showArt = true;
 
@@ -79,40 +73,68 @@ for (let i = 0; i < artLines.length; i++) {
   transitionProgress[i] = Array(artLines[i].length).fill(0);
 }
 
+// Function to generate random character
 function randomChar() {
   return chars[Math.floor(Math.random() * chars.length)];
 }
 
+// Function to generate random color
+function randomColor() {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return `rgb(${r},${g},${b})`;
+}
+
 function update() {
+  // Update ASCII art with random glitches
   const lines = artLines.map((line, i) => line.split('').map((ch, j) => {
     let progress = transitionProgress[i][j];
+
+    // Update progress
     if (showArt) {
       progress += 0.05;
       if (progress > 1) progress = 1;
-      transitionProgress[i][j] = progress;
-      return Math.random() < 1 - progress ? randomChar() : ch;
     } else {
       progress -= 0.05;
       if (progress < 0) progress = 0;
-      transitionProgress[i][j] = progress;
-      return Math.random() < 1 - progress ? randomChar() : ch;
+    }
+    transitionProgress[i][j] = progress;
+
+    // Glitching letters with color
+    const keepRandomChance = 0.011;
+    if (Math.random() < 1 - progress || (showArt && Math.random() < keepRandomChance)) {
+      const char = randomChar();
+      const color = showArt ? randomColor() : '#000';
+      return `<span style="color:${color}">${char}</span>`;
+    } else {
+      return ch;
     }
   }).join(''));
 
-  asciiEl.textContent = lines.join('\n');
+  asciiEl.innerHTML = lines.join('<br>');
 
-  // Fill entire section with random letters
-  const sectionLines = [];
-  const sectionHeight = Math.floor(sectionEl.clientHeight / 14); // approx line height
-  const sectionWidth = Math.floor(sectionEl.clientWidth / 8); // approx char width
-  for (let i = 0; i < sectionHeight; i++) {
-    let line = '';
-    for (let j = 0; j < sectionWidth; j++) {
-      line += randomChar();
+  // Optional background random letters (kept black)
+  if (typeof bgEl !== 'undefined') {
+    const bgCount = 1;
+    let bgString = '';
+    for (let i = 0; i < bgCount; i++) {
+      bgString += randomChar();
     }
-    sectionLines.push(line);
+    bgEl.textContent = bgString;
+    bgEl.style.color = '#000';
   }
 }
 
 setInterval(update, 50);
 setInterval(() => { showArt = !showArt; }, 5000);
+
+// Adjust font size
+function updateFontSize() {
+  const width = sectionEl.clientWidth;
+  const height = sectionEl.clientHeight;
+  const fontSize = Math.min(width / 100, height / 1);
+  asciiEl.style.fontSize = fontSize + 'px';
+}
+window.addEventListener('resize', updateFontSize);
+updateFontSize();
