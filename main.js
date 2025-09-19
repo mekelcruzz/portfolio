@@ -133,15 +133,8 @@ setInterval(() => { showArt = !showArt; }, 5000);
 function updateFontSize() {
   const width = sectionEl.clientWidth;
   const height = sectionEl.clientHeight;
-
-  let fontSize = Math.min(width / 100, height / 1);
-
-  // cap for mobile
-  const maxFontSize = 16; // tweak this based on how it looks on your phone
-  if (fontSize > maxFontSize) fontSize = maxFontSize;
-
+  const fontSize = Math.min(width / 100, height / 1);
   asciiEl.style.fontSize = fontSize + 'px';
 }
-
 window.addEventListener('resize', updateFontSize);
 updateFontSize();
