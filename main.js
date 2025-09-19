@@ -134,14 +134,14 @@ function updateFontSize() {
   const width = sectionEl.clientWidth;
   const height = sectionEl.clientHeight;
 
-  // keep your original scale (height / 1)
   let fontSize = Math.min(width / 100, height / 1);
 
-  // cap the font size so it won't zoom too much on small screens
-  const maxFontSize = 20; // tweak this number to your liking
+  // cap for mobile
+  const maxFontSize = 16; // tweak this based on how it looks on your phone
   if (fontSize > maxFontSize) fontSize = maxFontSize;
 
   asciiEl.style.fontSize = fontSize + 'px';
 }
+
 window.addEventListener('resize', updateFontSize);
 updateFontSize();
