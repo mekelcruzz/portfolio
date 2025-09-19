@@ -133,7 +133,7 @@ setInterval(() => { showArt = !showArt; }, 5000);
 function updateFontSize() {
   const width = sectionEl.clientWidth;
   const height = sectionEl.clientHeight;
-  const fontSize = Math.min(width / 120, height / 1);
+  const fontSize = Math.min(width / 100, height / 1);
   asciiEl.style.fontSize = fontSize + 'px';
 }
 window.addEventListener('resize', updateFontSize);
