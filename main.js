@@ -130,11 +130,12 @@ const observer = new IntersectionObserver(
       if (entry.isIntersecting) {
         entry.target.classList.add("visible");   // animate in
       } else {
-        entry.target.classList.remove("visible"); // animate out (all sections)
+        entry.target.classList.remove("visible"); // animate out
       }
     });
   },
-  { threshold: 0.3, rootMargin: "0px 0px -10% 0px" }
+  { threshold: 0.2, rootMargin: "0px 0px -50% 0px" } 
+  // 👆 needs 50% of section visible before in, and 20% scrolled past before out
 );
 
 sections.forEach((section) => observer.observe(section));
