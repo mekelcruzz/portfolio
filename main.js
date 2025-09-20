@@ -105,7 +105,7 @@ function update() {
       // ⬇️ wider random letters here
       return `<span style="color:${color}; display:inline-block; width:1.2ch; text-align:center;">${char}</span>`;
     } else {
-      return `<span style="font-size:1em">${ch}</span>`;
+      return `<span style="font-size:.9em">${ch}</span>`;
     }
   }).join(''));
 
