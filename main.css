@@ -338,16 +338,17 @@ footer {
   }
 
   nav.active {
-    left: 0; 
-    transform: translateX(0); 
+    transform: translateX(0); /* slide in */
   }
 
   .close-nav {
+    display: block; /* make sure it’s visible */
     font-size: 2rem;
     color: white;
     cursor: pointer;
     margin-left: auto;
     margin-bottom: 2rem;
+    padding: 0 1rem;
   }
 
   .hero-title {
@@ -361,6 +362,7 @@ footer {
 
   section {
     padding: 2rem 1rem;
+    margin-bottom: 2rem; /* spacing so cards don’t overlap */
   }
 
   .modal-content {
@@ -371,6 +373,18 @@ footer {
   form {
     width: 100%;
     padding: 0 1rem;
+  }
+
+  /* Hide About Me on small screens until scrolled */
+  #about {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: transform 0.8s ease, opacity 0.8s ease;
+  }
+
+  #about.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
