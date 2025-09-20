@@ -131,6 +131,7 @@ nav a {
 }
 
 section {
+  scroll-margin-top: 6.121em; /* adjust based on your header height */
   padding: 3rem 1.5rem;
   max-width: auto;
   margin: auto;
