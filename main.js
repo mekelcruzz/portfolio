@@ -121,22 +121,3 @@ function updateFontSize() {
 window.addEventListener('resize', updateFontSize);
 updateFontSize();
 
-// === Section animation in/out ===
-const sections = document.querySelectorAll("section");
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");   // animate in
-        entry.target.classList.remove("hidden"); // remove hidden
-      } else {
-        entry.target.classList.remove("visible"); // animate out
-        entry.target.classList.add("hidden");     // add hidden
-      }
-    });
-  },
-  { threshold: 0.2, rootMargin: "0px 0px -50% 0px" }
-);
-
-sections.forEach((section) => observer.observe(section));
