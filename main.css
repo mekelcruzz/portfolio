@@ -123,6 +123,7 @@ nav a {
   color: #000000;
 }
 
+
 section {
   scroll-margin-top: 6.121em; /* adjust based on your header height */
   padding: 3rem 1.5rem;
@@ -155,9 +156,9 @@ section:nth-of-type(even) {
 
 .hero-text {
   text-align: center;
-  font-size: 2em;
+  font-size: 1.2em;
   max-width: 600px;
-  margin: auto;
+
 }
 
 .section-title {

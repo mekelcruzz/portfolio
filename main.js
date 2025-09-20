@@ -96,18 +96,22 @@ function update() {
       if (progress < 0) progress = 0;
     }
     transitionProgress[i][j] = progress;
+
     const keepRandomChance = 0.011;
     if (Math.random() < 1 - progress || (showArt && Math.random() < keepRandomChance)) {
       const char = randomChar();
       const color = showArt ? randomColor() : '#000';
-      return `<span style="color:${color}">${char}</span>`;
+
+      // ⬇️ wider random letters here
+      return `<span style="color:${color}; display:inline-block; width:1.2ch; text-align:center;">${char}</span>`;
     } else {
-      return ch;
+      return ch; // ASCII art chars stay normal
     }
   }).join(''));
 
   asciiEl.innerHTML = lines.join('<br>');
 }
+
 
 setInterval(update, 50);
 setInterval(() => { showArt = !showArt; }, 5000);
@@ -119,7 +123,7 @@ function updateFontSize() {
   const width = sectionEl.clientWidth;
 
   // start with a decent size
-  let fontSize = width / 80;
+  let fontSize = width / 90;
   asciiEl.style.fontSize = fontSize + "px";
 
   // shrink until ASCII fits inside container
