@@ -321,6 +321,7 @@ footer {
     height: 100%;
     width: 250px;
     background: #000;
+    display: flex; /* ensure children stack correctly */
     flex-direction: column;
     justify-content: flex-start;
     padding-top: 4rem;
@@ -342,7 +343,7 @@ footer {
   }
 
   .close-nav {
-    display: block; /* make sure it’s visible */
+    display: block; /* force it visible */
     font-size: 2rem;
     color: white;
     cursor: pointer;
@@ -362,7 +363,7 @@ footer {
 
   section {
     padding: 2rem 1rem;
-    margin-bottom: 2rem; /* spacing so cards don’t overlap */
+    margin-bottom: 2rem; /* prevent overlap */
   }
 
   .modal-content {
@@ -375,11 +376,12 @@ footer {
     padding: 0 1rem;
   }
 
-  /* Hide About Me on small screens until scrolled */
+  /* Flashcard effect for About on small screens */
   #about {
     opacity: 0;
     transform: translateY(100px);
     transition: transform 0.8s ease, opacity 0.8s ease;
+    will-change: transform, opacity; /* performance boost */
   }
 
   #about.visible {
