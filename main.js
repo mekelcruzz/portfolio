@@ -123,7 +123,7 @@ function updateFontSize() {
   const width = sectionEl.clientWidth;
 
   // start with a decent size
-  let fontSize = width / 90;
+  let fontSize = width / 101;
   asciiEl.style.fontSize = fontSize + "px";
 
   // shrink until ASCII fits inside container
