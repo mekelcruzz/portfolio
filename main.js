@@ -52,6 +52,7 @@ document.addEventListener("click", (e) => {
   }
 });
 
+// === ASCII art effect (unchanged) ===
 const artLines = [
   "███╗   ███╗██╗   ██╗██╗  ██╗███████╗██╗          █████╗ ██████╗ ██╗███████╗    ██████╗ ██╗   ██╗ █████╗ ███╗   ██╗     ██████╗██████╗ ██╗   ██╗███████╗",
   "████╗ ████║╚██╗ ██╔╝██║ ██╔╝██╔════╝██║         ██╔══██╗██╔══██╗██║██╔════╝    ██╔══██╗██║   ██║██╔══██╗████╗  ██║    ██╔════╝██╔══██╗██║   ██║╚══███╔╝",
@@ -73,12 +74,10 @@ for (let i = 0; i < artLines.length; i++) {
   transitionProgress[i] = Array(artLines[i].length).fill(0);
 }
 
-// Function to generate random character
 function randomChar() {
   return chars[Math.floor(Math.random() * chars.length)];
 }
 
-// Function to generate random color
 function randomColor() {
   const r = Math.floor(Math.random() * 256);
   const g = Math.floor(Math.random() * 256);
@@ -87,11 +86,8 @@ function randomColor() {
 }
 
 function update() {
-  // Update ASCII art with random glitches
   const lines = artLines.map((line, i) => line.split('').map((ch, j) => {
     let progress = transitionProgress[i][j];
-
-    // Update progress
     if (showArt) {
       progress += 0.05;
       if (progress > 1) progress = 1;
@@ -100,8 +96,6 @@ function update() {
       if (progress < 0) progress = 0;
     }
     transitionProgress[i][j] = progress;
-
-    // Glitching letters with color
     const keepRandomChance = 0.011;
     if (Math.random() < 1 - progress || (showArt && Math.random() < keepRandomChance)) {
       const char = randomChar();
@@ -113,23 +107,11 @@ function update() {
   }).join(''));
 
   asciiEl.innerHTML = lines.join('<br>');
-
-  // Optional background random letters (kept black)
-  if (typeof bgEl !== 'undefined') {
-    const bgCount = 1;
-    let bgString = '';
-    for (let i = 0; i < bgCount; i++) {
-      bgString += randomChar();
-    }
-    bgEl.textContent = bgString;
-    bgEl.style.color = '#000';
-  }
 }
 
 setInterval(update, 50);
 setInterval(() => { showArt = !showArt; }, 5000);
 
-// Adjust font size
 function updateFontSize() {
   const width = sectionEl.clientWidth;
   const height = sectionEl.clientHeight;
@@ -138,3 +120,22 @@ function updateFontSize() {
 }
 window.addEventListener('resize', updateFontSize);
 updateFontSize();
+
+// === Flashcard scroll animation ===
+const sections = document.querySelectorAll("section");
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");   // animate in
+      } else {
+        entry.target.classList.remove("visible"); // animate out (all sections)
+      }
+    });
+  },
+  { threshold: 0.3, rootMargin: "0px 0px -10% 0px" }
+);
+
+sections.forEach((section) => observer.observe(section));
+

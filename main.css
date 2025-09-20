@@ -129,16 +129,32 @@ nav a {
   color: lime; /* default random char color */
 }
 
-
-
-
 section {
   padding: 3rem 1.5rem;
   max-width: auto;
   margin: auto;
   margin-bottom: 3em;
+
+  /* flashcard effect defaults */
+  position: relative;
+  z-index: 0;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.8s ease;
 }
 
+section.visible {
+  transform: translateY(0);
+  opacity: 1;
+  z-index: 10; /* new section overlaps previous */
+}
+
+/* make the first section visible immediately */
+section:first-of-type {
+  transform: translateY(0);
+  opacity: 1;
+  z-index: 10;
+}
 
 section:nth-of-type(odd) {
   background: #fff;
@@ -169,7 +185,6 @@ section:nth-of-type(even) {
   font-size: 2.5em;
   margin-bottom: 1rem;
   padding-bottom: 0.3rem;
-
 }
 
 .sub-title {
@@ -197,7 +212,6 @@ section:nth-of-type(even) {
   opacity: 0.8;
 }
 
-
 form {
   display: flex;
   flex-direction: column;
@@ -214,12 +228,10 @@ button {
   font-size: 1rem;
 }
 
-
 section:nth-of-type(even) input,
 section:nth-of-type(even) textarea {
   background: #111;
   color: #fff;
-
 }
 
 button {
@@ -232,6 +244,7 @@ button {
 button:hover {
   background: #333;
 }
+
 .contacts-footer a {
   color: white;
   text-decoration: none;
@@ -271,10 +284,8 @@ footer {
   display: block;   
 }
 
-
 /* responsiveness */
 @media (max-width: 1024px) {
-
   nav {
     gap: 3rem;
   }
@@ -331,7 +342,7 @@ footer {
     transform: translateX(0); 
   }
 
-   .close-nav {
+  .close-nav {
     font-size: 2rem;
     color: white;
     cursor: pointer;
@@ -393,5 +404,3 @@ footer {
     height: 24px;
   }
 }
-
-
