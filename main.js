@@ -113,11 +113,25 @@ setInterval(update, 50);
 setInterval(() => { showArt = !showArt; }, 5000);
 
 function updateFontSize() {
+  const asciiEl = document.getElementById("asciiArt");
+  const sectionEl = asciiEl.parentElement;
+
   const width = sectionEl.clientWidth;
-  const height = sectionEl.clientHeight;
-  const fontSize = Math.min(width / 100, height / 1);
-  asciiEl.style.fontSize = fontSize + 'px';
+
+  // start with a decent size
+  let fontSize = width / 80;
+  asciiEl.style.fontSize = fontSize + "px";
+
+  // shrink until ASCII fits inside container
+  while (asciiEl.scrollWidth > sectionEl.clientWidth && fontSize > 6) {
+    fontSize -= 1;
+    asciiEl.style.fontSize = fontSize + "px";
+  }
 }
-window.addEventListener('resize', updateFontSize);
-updateFontSize();
+
+window.addEventListener("resize", updateFontSize);
+window.addEventListener("load", updateFontSize);
+
+
+
 
