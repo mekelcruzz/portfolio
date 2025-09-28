@@ -1,26 +1,38 @@
 // Grab elements
 const modal = document.getElementById("contactModal");
 const btn = document.getElementById("contactBtn");
-const span = document.querySelector(".close");
 const burger = document.getElementById("burger");
 const navMenu = document.getElementById("navMenu");
 const closeNav = document.getElementById("closeNav");
+const span = modal.querySelector(".close");
 
 // Show modal
 btn.onclick = function (e) {
   e.preventDefault();
-  modal.style.display = "block";
+  modal.style.display = "block"; // make sure it's visible again
+  requestAnimationFrame(() => {
+    modal.classList.add("show");
+    modal.classList.remove("hide");
+  });
 };
 
 // Close modal with X
 span.onclick = function () {
-  modal.style.display = "none";
+  modal.classList.remove("show");
+  modal.classList.add("hide");
+  setTimeout(() => {
+    modal.style.display = "none";
+  }, 300);
 };
 
 // Close modal when clicking outside
 window.onclick = function (event) {
   if (event.target === modal) {
-    modal.style.display = "none";
+    modal.classList.remove("show");
+    modal.classList.add("hide");
+    setTimeout(() => {
+      modal.style.display = "none";
+    }, 300);
   }
 };
 
@@ -137,5 +149,96 @@ window.addEventListener("resize", updateFontSize);
 window.addEventListener("load", updateFontSize);
 
 
+const navLinks = document.querySelectorAll("#navMenu a");
+const logo = document.getElementById("logo");
 
+// 🔹 Neon glitch for nav links
+function glitchNav(el) {
+  const randX = Math.floor(Math.random() * 6 - 3);
+  const randY = Math.floor(Math.random() * 6 - 3);
+  const colors = ["#0ff", "#f0f", "#ff0"];
+  const c1 = colors[Math.floor(Math.random() * colors.length)];
+  const c2 = colors[Math.floor(Math.random() * colors.length)];
+
+  el.style.transform = `translate(${randX}px, ${randY}px)`;
+  el.style.textShadow = `
+    ${randX}px ${-randY}px ${c1},
+    ${-randX}px ${randY}px ${c2}
+  `;
+
+  setTimeout(() => {
+    el.style.transform = "translate(0,0)";
+    el.style.textShadow = "none";
+  }, 120);
+}
+
+// 🔹 Glitch for logo (grayscale/white, more subtle)
+function glitchLogo(el) {
+  const randX = Math.floor(Math.random() * 6 - 3);
+  const randY = Math.floor(Math.random() * 6 - 3);
+  const colors = [
+    "rgba(100,100,100,1)",
+    "rgba(194,194,194,1)",
+    "rgba(255,255,255,1)"
+  ];
+  const c1 = colors[Math.floor(Math.random() * colors.length)];
+  const c2 = colors[Math.floor(Math.random() * colors.length)];
+
+  el.style.transform = `translate(${randX}px, ${randY}px)`;
+  el.style.textShadow = `
+    ${randX}px ${-randY}px ${c1},
+    ${-randX}px ${randY}px ${c2}
+  `;
+
+  setTimeout(() => {
+    el.style.transform = "translate(0,0)";
+    el.style.textShadow = "none";
+  }, 120);
+}
+
+// 🔹 Hover glitch (desktop only) for nav links
+navLinks.forEach(link => {
+  link.addEventListener("mouseenter", () => {
+    if (window.innerWidth > 768) {
+      link.glitchInterval = setInterval(() => glitchNav(link), 150);
+    }
+  });
+
+  link.addEventListener("mouseleave", () => {
+    clearInterval(link.glitchInterval);
+    link.style.transform = "translate(0,0)";
+    link.style.textShadow = "none";
+  });
+});
+
+// 🔹 Auto glitch in mobile view (nav links)
+function autoGlitchMobile() {
+  if (window.innerWidth <= 768) {
+    navLinks.forEach(link => {
+      if (!link.autoGlitchInterval) {
+        link.autoGlitchInterval = setInterval(
+          () => glitchNav(link),
+          400 + Math.random() * 600
+        );
+      }
+    });
+  } else {
+    navLinks.forEach(link => {
+      clearInterval(link.autoGlitchInterval);
+      link.autoGlitchInterval = null;
+      link.style.transform = "translate(0,0)";
+      link.style.textShadow = "none";
+    });
+  }
+}
+autoGlitchMobile();
+window.addEventListener("resize", autoGlitchMobile);
+
+// 🔹 Scroll-to-top behavior for logo
+logo.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// 🔹 Auto glitch for logo (always running)
+setInterval(() => glitchLogo(logo), 200 + Math.random() * 300);
 
